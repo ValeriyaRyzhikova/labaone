@@ -19,9 +19,13 @@ public:
     QString printWatcher();
     void change(const char*);
     FWatcher();
-    FWatcher(const FWatcher& other);
-    FWatcher& operator=(const FWatcher &other);
-    ~FWatcher(){};
+    FWatcher(const FWatcher &other);
+    FWatcher &operator=(const FWatcher &other);
+    ~FWatcher(){
+        delete &state;
+        delete &existenceFile;
+        delete &nameFile;
+    }
 public slots:
     void changedState(QString name);
 };

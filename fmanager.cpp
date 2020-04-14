@@ -31,9 +31,11 @@ int FManager::findFile(QString name)
 
 void FManager::updateTime()
 {
+
     for(int i=0; i<fileList.size(); i++)
        if ((fileList[i]->size())!=state[i])
        {
+           //cout<<"signal";
            QString name = fileList[i]->fileName();
            state[i] = fileList[i]->size();
            emit alterWatcher(name);

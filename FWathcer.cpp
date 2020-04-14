@@ -7,20 +7,18 @@ FWatcher::FWatcher(QString name)
     existenceFile=file.exists();
     state=file.size();
     file.close();
-
 }
 
 QString FWatcher::printWatcher()
 {
-    QString stroka_dla_vyvoda("\nname: ");
-    stroka_dla_vyvoda += nameFile + QString(" size:") + QString::number(state) + QString(" sushestvov: ") + QString::number(existenceFile);
-    return stroka_dla_vyvoda;
-
-
+    QString stringForPrint("\nname: ");
+    stringForPrint += nameFile + QString(" size:") + QString::number(state) + QString(" sushestvov: ") + QString::number(existenceFile);
+    return stringForPrint;
 }
 
 void FWatcher::changedState(QString name)
 {
+    //cout << "slot" << endl;
     if (name==nameFile)
     {
         QFile file(name);
@@ -28,14 +26,15 @@ void FWatcher::changedState(QString name)
     }
 }
 
-void FWatcher::change(const char* new_text)
+void FWatcher::change(const char *new_text)
 {
      QFile *file=new QFile(nameFile);
-     if (file->open(QIODevice::Append))
-             file->write(new_text);
-     state=file->size();
-     file->close();
-     existenceFile=true;
+     if (file->open(QIODevice::Append)) {
+         file->write(new_text);
+         state=file->size();
+         file->close();
+         existenceFile=true;
+     }
 }
 
 FWatcher::FWatcher()
@@ -45,7 +44,7 @@ FWatcher::FWatcher()
     existenceFile=false;
 }
 
-FWatcher::FWatcher(const FWatcher& other)
+FWatcher::FWatcher(const FWatcher &other)
 {
     nameFile=other.nameFile;
     state=other.state;

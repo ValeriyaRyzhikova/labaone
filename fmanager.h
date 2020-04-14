@@ -11,13 +11,13 @@ using namespace std;
 class FManager:public QObject
 {
     Q_OBJECT
-    static FManager* instance;
+    static FManager *instance;
     QList<QFile*> fileList;
     QList<int> state;
-    QTimer* timer;
+    QTimer *timer;
     FManager();
 public:
-    static FManager* getInstance(){
+    static FManager *getInstance(){
         if (!instance)
             instance=new FManager;
         return instance;
