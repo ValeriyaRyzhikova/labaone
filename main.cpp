@@ -5,8 +5,17 @@
 #include <QThread>
 #include "fmanager.h"
 #include "FWathcer.h"
+#include "QTimer"
 #include <QSharedPointer>
 
+
+QList<QSharedPointer<FWatcher>>* returnLisWatcher(QList<QSharedPointer<FWatcher>>* list = NULL)//, bool del = 0)
+{
+    static QList<QSharedPointer<FWatcher>>* l;
+    //if (del) l = NULL;
+    if (list == NULL) return l;
+    else return l=list;
+}
 
 void connectOneWatcher(FWatcher* w){
     QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, w, &FWatcher::changedState);
@@ -20,12 +29,21 @@ void connectWatcher(QList<QSharedPointer<FWatcher>> &listWather)
 }
 
 
-void printWatcherlist(QList<QSharedPointer<FWatcher>> &listWather)
+void printWatcherlist0(QList<QSharedPointer<FWatcher>> &listWather)
 {
     cout<<"\n";
     for(QSharedPointer<FWatcher> watcher:listWather)
         cout<<watcher->printWatcher().toStdString();
 }
+
+void printWatcherlist()
+{
+    QList<QSharedPointer<FWatcher>> *listWather=returnLisWatcher();
+    cout<<"\n";
+    for(QSharedPointer<FWatcher> watcher:*listWather)
+        cout<<watcher->printWatcher().toStdString();
+}
+
 
 void printOneWatcher(FWatcher* w)
 {
@@ -39,7 +57,6 @@ static void doDeleteLater(QObject *obj)
 
 int main(int argc, char *argv[])
 {
-
     QCoreApplication a(argc, argv);
     FManager *F = FManager::getInstance();
     QList<QSharedPointer<FWatcher>> listWather;
@@ -55,19 +72,21 @@ int main(int argc, char *argv[])
 
     connectWatcher(listWather);
 
-    printWatcherlist(listWather);
-    cout<<"\n";
+    returnLisWatcher(&listWather);
+    QTimer timer;
+    timer.setInterval(2000);
+    QObject::connect(&timer, &QTimer::timeout, printWatcherlist);
+    timer.start();
+
     listWather[0]->deleteLater();
     listWather.removeAt(0);
     listWather[0]->change("lotv");
-
     QFile *file=new QFile("E:/qt/file/rum.txt");
     if (file->open(QIODevice::Append)) {
         file->write("punpun");
         file->close();
 }
-    QThread:: sleep(5);
-    printWatcherlist(listWather);
+
 
     return a.exec();
 }
