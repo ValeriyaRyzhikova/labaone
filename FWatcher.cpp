@@ -1,4 +1,4 @@
-#include "FWathcer.h"
+#include "FWatcher.h"
 
 FWatcher::FWatcher(QString name)
 {
@@ -18,7 +18,6 @@ QString FWatcher::printWatcher()
 
 void FWatcher::changedState(QString name)
 {
-    //cout << "slot" << endl;
     if (name==nameFile)
     {
         QFile file(name);
@@ -28,11 +27,11 @@ void FWatcher::changedState(QString name)
 
 void FWatcher::change(const char *new_text)
 {
-     QFile *file=new QFile(nameFile);
-     if (file->open(QIODevice::Append)) {
-         file->write(new_text);
-         state=file->size();
-         file->close();
+     QFile file(nameFile);
+     if (file.open(QIODevice::Append)) {
+         file.write(new_text);
+         state=file.size();
+         file.close();
          existenceFile=true;
      }
 }

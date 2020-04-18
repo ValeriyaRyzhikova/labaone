@@ -26,7 +26,6 @@ public:
     void addFile(QString);
     void delFile(QString);
     int findFile(QString);
-
 public slots:
     void updateTime();
 signals:
