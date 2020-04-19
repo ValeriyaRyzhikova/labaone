@@ -64,22 +64,14 @@ int main(int argc, char *argv[])
     timer.setInterval(5000);
     QObject::connect(&timer, &QTimer::timeout, printWatcherlist);
     timer.start();
-    //listWatcher.removeAt(0);
-   // listWatcher[0].change("E:/qt/file/pum.txt");
-    /*QFile file("E:/qt/file/rum.txt");
+    listWatcher.removeAt(0);
+   listWatcher[0].change("E:/qt/file/pum.txt");
+    QFile file("E:/qt/file/rum.txt");
     if (file.open(QIODevice::Append)) {
         file.write("punpun");
         file.close();
     }
 
 
-    F->addFile("E:/qt/file/tum.txt");
-    for(int i=0; i<5000000; i++)
-    {
-        listWatcher.append(FWatcher("E:/qt/file/tum.txt"));
-        connectWatcher();
-        listWatcher.removeAt(0);
-    }
-*/
     return a.exec();
 }
