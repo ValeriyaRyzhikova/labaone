@@ -27,13 +27,8 @@ void FWatcher::changedState(QString name)
 
 void FWatcher::change(const char *new_text)
 {
-     QFile file(nameFile);
-     if (file.open(QIODevice::Append)) {
-         file.write(new_text);
-         state=file.size();
-         file.close();
-         existenceFile=true;
-     }
+  nameFile=new_text;
+  delete new_text;
 }
 
 FWatcher::FWatcher()

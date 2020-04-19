@@ -10,33 +10,25 @@
 #include <QPointer>
 
 
-QList<QPointer<FWatcher>> listWatcher;
+QList<FWatcher> listWatcher;
 
 void connectOneWatcher(FWatcher* w){
     QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, w, &FWatcher::changedState);
 }
 
 
-void connectWatcher(QList<QPointer<FWatcher>> &listWather)
+void connectWatcher(QList<FWatcher> &listWather)
 {
-    for (QPointer<FWatcher> watcher: listWather)
-        QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, watcher.data(), &FWatcher::changedState);
+    for (FWatcher watcher: listWather)
+        QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &watcher, &FWatcher::changedState);
 }
 
-
-
-void printWatcherlist0(QList<QPointer<FWatcher>> &listWather)
-{
-    cout<<"\n";
-    for(QPointer<FWatcher> watcher:listWather)
-        cout<<watcher->printWatcher().toStdString();
-}
 
 void printWatcherlist()
 {
     cout<<"\n";
-    for(QPointer<FWatcher> watcher: listWatcher)
-        cout<<watcher->printWatcher().toStdString();
+    for(FWatcher watcher: listWatcher)
+        cout<<watcher.printWatcher().toStdString();
 }
 
 
@@ -51,9 +43,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     FManager *F = FManager::getInstance();
-    listWatcher.append(QPointer<FWatcher>(new FWatcher("E:/qt/file/tum.txt")));
-    listWatcher.append(QPointer<FWatcher>(new FWatcher("E:/qt/file/kum.txt")));
-    listWatcher.append(QPointer<FWatcher>(new FWatcher("E:/qt/file/rum.txt")));
+    listWatcher.append(FWatcher("E:/qt/file/tum.txt"));
+    listWatcher.append(FWatcher("E:/qt/file/kum.txt"));
+    listWatcher.append(FWatcher("E:/qt/file/rum.txt"));
 
     QList<QString> nameList;
     nameList<<"E:/qt/file/rum.txt"<<"E:/qt/file/kum.txt";
@@ -71,7 +63,7 @@ int main(int argc, char *argv[])
     timer.start();
 
     listWatcher.removeAt(0);
-    listWatcher[0]->change("lotv");
+    listWatcher[0].change("E:/qt/file/pum.txt");
     QFile *file=new QFile("E:/qt/file/rum.txt");
     if (file->open(QIODevice::Append)) {
         file->write("punpun");
