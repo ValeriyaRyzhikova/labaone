@@ -27,10 +27,12 @@ public:
     void addFile(QString);
     void delFile(QString);
     int findFile(QString);
+    void updateI(int);
+    void updateAll();
 public slots:
     void updateTime();
 signals:
-    void alterWatcher(QString name);
+    void alterWatcher(QString name, int state, bool existence);
 };
 
 #endif // FMANAGER_H

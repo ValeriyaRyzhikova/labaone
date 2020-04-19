@@ -3,9 +3,6 @@
 FWatcher::FWatcher(QString name)
 {
     nameFile=name;
-    QFileInfo file(name);
-    existenceFile=file.exists();
-    state=file.size();
 }
 
 QString FWatcher::printWatcher()
@@ -15,12 +12,15 @@ QString FWatcher::printWatcher()
     return stringForPrint;
 }
 
-void FWatcher::changedState(QString name)
+void FWatcher::changedState(QString name, int _state, bool _existence)
 {
     if (name==nameFile)
     {
-        QFileInfo file(name);
-        state=file.size();
+        if (_existence)
+            state=_state;
+        else
+            state=0;
+        existenceFile=_existence;
     }
 }
 

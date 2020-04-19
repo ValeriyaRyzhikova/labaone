@@ -8,8 +8,11 @@ FManager::FManager()
 
 void FManager::addFile(QString name)
 {
-    fileList.append(QFile(name));
-    state.append(QFile(name).size());
+    fileList.append(QFileInfo(name));
+    if (QFileInfo(name).exists())
+        state.append(QFileInfo(name).size());
+    else
+        state.append(-1);
 }
 
 void FManager::delFile(QString name)
@@ -28,17 +31,30 @@ int FManager::findFile(QString name)
     return -1;
 }
 
+void FManager::updateI(int i)
+{
+    QString name = fileList[i].absoluteFilePath();
+    if (fileList[i].exists())
+        state[i] = fileList[i].size();
+    else
+        state[i]=-1;
+    emit alterWatcher(name, state[i], fileList[i].exists());
+}
+
+void FManager::updateAll()
+{
+    for(int i=0; i<fileList.size();i++)
+        updateI(i);
+}
+
 void FManager::updateTime()
 {
 
-    for(int i=0; i<fileList.size(); i++)
-       if ((fileList[i].size())!=state[i])
-       {
-           QString name = fileList[i].fileName();
-           state[i] = fileList[i].size();
-           emit alterWatcher(name);
-       }
-
+    for(int i=0; i<fileList.size(); i++){
+        fileList[i].refresh();
+        if ((fileList[i].size())!=state[i])
+            updateI(i);
+    }
 }
 
 FManager *FManager::instance = 0;

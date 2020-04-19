@@ -1,7 +1,7 @@
 #ifndef FNABLUDATEL_H
 #define FNABLUDATEL_H
 #include <QList>
-#include <QFileInfo>
+#include <QFile>
 #include <QString>
 #include <QObject>
 #include<iostream>
@@ -23,7 +23,7 @@ public:
     FWatcher &operator=(const FWatcher &other);
     ~FWatcher(){}
 public slots:
-    void changedState(QString name);
+    void changedState(QString name, int state, bool existence);
 };
 
 #endif // FWATCHER_H
