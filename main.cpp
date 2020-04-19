@@ -64,10 +64,10 @@ int main(int argc, char *argv[])
     timer.start();
     listWatcher.removeAt(0);
     listWatcher[0].change("E:/qt/file/pum.txt");
-    QFile *file=new QFile("E:/qt/file/rum.txt");
-    if (file->open(QIODevice::Append)) {
-        file->write("punpun");
-        file->close();
+    QFile file("E:/qt/file/rum.txt");
+    if (file.open(QIODevice::Append)) {
+        file.write("punpun");
+        file.close();
     }
 
     return a.exec();

@@ -12,14 +12,11 @@ class FManager:public QObject
 {
     Q_OBJECT
     static FManager *instance;
-    QList<QFile*> fileList;
+    QList<QFile> fileList;
     QList<int> state;
-    QTimer *timer;
+    QTimer timer;
     FManager();
-    ~FManager(){
-        delete instance;
-        delete timer;
-    }
+    ~FManager(){}
 public:
     static FManager *getInstance(){
         if (!instance)

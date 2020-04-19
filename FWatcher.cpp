@@ -45,11 +45,3 @@ FWatcher::FWatcher(const FWatcher &other)
     existenceFile=other.existenceFile;
 }
 
-FWatcher& FWatcher::operator=(const FWatcher &other)
-{
-    nameFile=other.nameFile;
-    state=other.state;
-    existenceFile=other.existenceFile;
-    return *this;
-}
-
