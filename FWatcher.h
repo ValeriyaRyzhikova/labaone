@@ -1,7 +1,7 @@
 #ifndef FNABLUDATEL_H
 #define FNABLUDATEL_H
 #include <QList>
-#include <QFile>
+#include <QFileInfo>
 #include <QString>
 #include <QObject>
 #include<iostream>

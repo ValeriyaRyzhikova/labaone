@@ -1,7 +1,7 @@
 #ifndef FMANAGER_H
 #define FMANAGER_H
 #include <QList>
-#include <QFile>
+#include <QFileInfo>
 #include <QString>
 #include <QTimer>
 #include <QTime>
@@ -12,7 +12,7 @@ class FManager:public QObject
 {
     Q_OBJECT
     static FManager *instance;
-    QList<QFile> fileList;
+    QList<QFileInfo> fileList;
     QList<int> state;
     QTimer timer;
     FManager();

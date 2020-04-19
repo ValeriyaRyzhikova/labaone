@@ -12,12 +12,12 @@
 
 QList<FWatcher> listWatcher;
 
-void connectOneWatcher(FWatcher* w){
-    QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, w, &FWatcher::changedState);
+void connectOneWatcher(FWatcher w){
+    QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &w, &FWatcher::changedState);
 }
 
 
-void connectWatcher(QList<FWatcher> &listWatcher)
+void connectWatcher()
 {
     for (int i=0; i<listWatcher.size(); i++)
         QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &(listWatcher[i]), &FWatcher::changedState);
@@ -33,9 +33,9 @@ void printWatcherlist()
 }
 
 
-void printOneWatcher(FWatcher* w)
+void printOneWatcher(FWatcher w)
 {
-    cout<< w->printWatcher().toStdString() << endl;
+    cout<< w.printWatcher().toStdString() << endl;
 }
 
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
     F->addFile("E:/qt/file/tum.txt");
 
-    connectWatcher(listWatcher);
+    connectWatcher();
 
     printWatcherlist();
 

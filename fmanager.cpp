@@ -8,11 +8,8 @@ FManager::FManager()
 
 void FManager::addFile(QString name)
 {
-    cout<<"creation"<<endl;
     fileList.append(QFile(name));
-    //state.append(QFile(name).size());
-    state.append(0);
-    cout<<"destruction"<<endl;
+    state.append(QFile(name).size());
 }
 
 void FManager::delFile(QString name)
@@ -37,7 +34,6 @@ void FManager::updateTime()
     for(int i=0; i<fileList.size(); i++)
        if ((fileList[i].size())!=state[i])
        {
-           //cout<<"signal";
            QString name = fileList[i].fileName();
            state[i] = fileList[i].size();
            emit alterWatcher(name);
