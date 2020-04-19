@@ -17,18 +17,19 @@ void connectOneWatcher(FWatcher* w){
 }
 
 
-void connectWatcher(QList<FWatcher> &listWather)
+void connectWatcher(QList<FWatcher> &listWatcher)
 {
-    for (FWatcher watcher: listWather)
-        QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &watcher, &FWatcher::changedState);
+    for (int i=0; i<listWatcher.size(); i++)
+        QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &(listWatcher[i]), &FWatcher::changedState);
 }
 
 
 void printWatcherlist()
 {
     cout<<"\n";
-    for(FWatcher watcher: listWatcher)
-        cout<<watcher.printWatcher().toStdString();
+    for (int i=0; i<listWatcher.size(); i++)
+        //cout<<1<<endl;
+        cout<<(listWatcher[i]).printWatcher().toStdString();
 }
 
 
@@ -43,9 +44,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     FManager *F = FManager::getInstance();
-    listWatcher.append(FWatcher("E:/qt/file/tum.txt"));
-    listWatcher.append(FWatcher("E:/qt/file/kum.txt"));
-    listWatcher.append(FWatcher("E:/qt/file/rum.txt"));
+    FWatcher d("E:/qt/file/tum.txt");
+    listWatcher.append(d);
+    listWatcher.append(*(new FWatcher("E:/qt/file/kum.txt")));
+    //listWatcher.append(FWatcher("E:/qt/file/rum.txt"));
 
     QList<QString> nameList;
     nameList<<"E:/qt/file/rum.txt"<<"E:/qt/file/kum.txt";
@@ -62,7 +64,7 @@ int main(int argc, char *argv[])
     QObject::connect(&timer, &QTimer::timeout, printWatcherlist);
     timer.start();
 
-    listWatcher.removeAt(0);
+    listWatcher.removeAt(1);
     listWatcher[0].change("E:/qt/file/pum.txt");
     QFile *file=new QFile("E:/qt/file/rum.txt");
     if (file->open(QIODevice::Append)) {
