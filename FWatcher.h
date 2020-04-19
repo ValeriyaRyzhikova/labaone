@@ -21,11 +21,7 @@ public:
     FWatcher();
     FWatcher(const FWatcher &other);
     FWatcher &operator=(const FWatcher &other);
-    ~FWatcher(){
-        delete &state;
-        delete &existenceFile;
-        delete &nameFile;
-    }
+    ~FWatcher(){}
 public slots:
     void changedState(QString name);
 };

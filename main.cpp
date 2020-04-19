@@ -44,10 +44,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     FManager *F = FManager::getInstance();
-    FWatcher d("E:/qt/file/tum.txt");
-    listWatcher.append(d);
-    listWatcher.append(*(new FWatcher("E:/qt/file/kum.txt")));
-    //listWatcher.append(FWatcher("E:/qt/file/rum.txt"));
+    listWatcher.append(FWatcher("E:/qt/file/tum.txt"));
+    listWatcher.append(FWatcher("E:/qt/file/kum.txt"));
+    listWatcher.append(FWatcher("E:/qt/file/rum.txt"));
 
     QList<QString> nameList;
     nameList<<"E:/qt/file/rum.txt"<<"E:/qt/file/kum.txt";
@@ -63,8 +62,7 @@ int main(int argc, char *argv[])
     timer.setInterval(5000);
     QObject::connect(&timer, &QTimer::timeout, printWatcherlist);
     timer.start();
-
-    listWatcher.removeAt(1);
+    listWatcher.removeAt(0);
     listWatcher[0].change("E:/qt/file/pum.txt");
     QFile *file=new QFile("E:/qt/file/rum.txt");
     if (file->open(QIODevice::Append)) {

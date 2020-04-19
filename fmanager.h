@@ -18,9 +18,7 @@ class FManager:public QObject
     FManager();
     ~FManager(){
         delete instance;
-        delete &fileList;
         delete timer;
-        delete &state;
     }
 public:
     static FManager *getInstance(){
