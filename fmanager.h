@@ -16,7 +16,7 @@ class FManager:public QObject
     QList<int> state;
     QTimer timer;
     FManager();
-    ~FManager(){}
+    ~FManager(){delete instance;}
 public:
     static FManager *getInstance(){
         if (!instance)

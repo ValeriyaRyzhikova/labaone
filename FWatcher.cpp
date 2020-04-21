@@ -27,7 +27,6 @@ void FWatcher::changedState(QString name, int _state, bool _existence)
 void FWatcher::change(const char *new_text)
 {
   nameFile=new_text;
-  delete new_text;
 }
 
 FWatcher::FWatcher()
