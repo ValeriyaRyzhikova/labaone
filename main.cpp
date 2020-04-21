@@ -1,4 +1,4 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QList>
 #include <QString>
 #include <QObject>
@@ -8,6 +8,7 @@
 #include "QTimer"
 #include <QSharedPointer>
 #include <QPointer>
+#include "mainwindow.h"
 
 
 QList<FWatcher> listWatcher;
@@ -44,7 +45,9 @@ void printOneWatcher(FWatcher w)
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
     FManager *F = FManager::getInstance();
     listWatcher.append(FWatcher("E:/qt/file/tum.txt"));
     listWatcher.append(FWatcher("E:/qt/file/kum.txt"));
