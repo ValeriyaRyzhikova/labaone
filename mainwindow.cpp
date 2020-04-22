@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, this, &MainWindow::updateWatcherListWidget);
 }
 
 MainWindow::~MainWindow()
@@ -25,14 +24,17 @@ void MainWindow::updateWatcherListWidget()
     int i = ui->watcherListWidget->currentRow();
     ui->watcherListWidget->clear();
     for(int i=0; i<listWatcher.size(); i++)
-        ui->watcherListWidget->addItem(listWatcher[i].printWatcher());
+        ui->watcherListWidget->addItem(listWatcher[i].getToStringInfo());
     ui->watcherListWidget->setCurrentRow(i);
 }
 
 void MainWindow::addFileToManager()
 {
-    FManager::getInstance()->addFile(ui->managerLineEdit->text());
-    updateManagerListWidget();
+    if (!((ui->managerLineEdit->text()).isEmpty()))
+    {
+        FManager::getInstance()->addFile(ui->managerLineEdit->text());
+        updateManagerListWidget();
+    }
 }
 
 void MainWindow::delFileFromManager()
@@ -44,11 +46,15 @@ void MainWindow::delFileFromManager()
 
 void MainWindow::addFileToListWatcher()
 {
-    listWatcher.append(FWatcher(ui->watcherLineEdit->text()));
-    QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &(listWatcher.last()), &FWatcher::changedState);
-    FManager::getInstance()->updateI(FManager::getInstance()->findFile(ui->watcherLineEdit->text()));
-    //FManager::getInstance()->updateAll();
-    updateWatcherListWidget();
+    if (!((ui->watcherLineEdit->text()).isEmpty()))
+    {
+        listWatcher.append(FWatcher(ui->watcherLineEdit->text()));
+        QObject :: connect(FManager::getInstance(), &FManager::alterWatcher, &(listWatcher.last()), &FWatcher::changedState);
+        FManager::getInstance()->updateIndex(FManager::getInstance()->findFile(ui->watcherLineEdit->text()));
+        //FManager::getInstance()->updateAll();
+        updateWatcherListWidget();
+        QObject :: connect(&(listWatcher.last()), &FWatcher::signalUpdateWiget, this, &MainWindow::updateWatcherListWidget);
+    }
 }
 
 void MainWindow::delFileFromListWatcher()
@@ -61,8 +67,9 @@ void MainWindow::delFileFromListWatcher()
 void MainWindow::renameWatcher()
 {
     int i=ui->watcherListWidget->currentRow();
-    listWatcher[i].change(ui->watcherLineEdit->text());
-    FManager::getInstance()->updateI(FManager::getInstance()->findFile(ui->watcherLineEdit->text()));
+    if (i>=0 && !(ui->watcherLineEdit->text()).isEmpty())
+    listWatcher[i].renameFile(ui->watcherLineEdit->text());
+    FManager::getInstance()->updateIndex(FManager::getInstance()->findFile(ui->watcherLineEdit->text()));
     updateWatcherListWidget();
 }
 

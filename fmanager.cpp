@@ -46,7 +46,7 @@ int FManager::findFile(QString name)
     return FManager::getNameList().indexOf(f.absoluteFilePath());
 }
 
-void FManager::updateI(int i)
+void FManager::updateIndex(int i)
 {
     if (i >= 0)
     {
@@ -59,7 +59,7 @@ void FManager::updateI(int i)
 void FManager::updateAll()
 {
     for(int i=0; i<fileList.size();i++)
-        updateI(i);
+        updateIndex(i);
 }
 
 void FManager::updateTime()
@@ -67,7 +67,7 @@ void FManager::updateTime()
 
     for(int i=0; i<fileList.size(); i++){
         if (state[i]!=returnFileSize(i))
-            updateI(i);
+            updateIndex(i);
     }
 }
 

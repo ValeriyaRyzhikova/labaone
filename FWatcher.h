@@ -17,8 +17,8 @@ class FWatcher: public QObject
     QString nameFile;
 public:
     FWatcher(QString);
-    QString printWatcher();
-    void change(QString);
+    QString getToStringInfo();
+    void renameFile(QString);
     FWatcher();
     FWatcher(const FWatcher &other);
     FWatcher &operator=(const FWatcher &other);
@@ -26,6 +26,8 @@ public:
     QString getNameFile();
 public slots:
     void changedState(QString name, int state, bool existence);
+signals:
+    void signalUpdateWiget();
 };
 
 #endif // FWATCHER_H
