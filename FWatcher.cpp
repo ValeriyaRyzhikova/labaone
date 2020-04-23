@@ -5,9 +5,9 @@ FWatcher::FWatcher(QString name)
     nameFile=name;
 }
 
-QString FWatcher::printWatcher()
+QString FWatcher::getToStringInfo()
 {
-    QString stringForPrint("\nname: ");
+    QString stringForPrint("name: ");
     stringForPrint += nameFile + QString(" size:") + QString::number(state) + QString(" sushestvov: ") + QString::number(existenceFile);
     return stringForPrint;
 }
@@ -21,12 +21,13 @@ void FWatcher::changedState(QString name, int _state, bool _existence)
         else
             state=0;
         existenceFile=_existence;
+        emit signalUpdateWiget();
     }
 }
 
-void FWatcher::change(const char *new_text)
+void FWatcher::renameFile(QString newText)
 {
-  nameFile=new_text;
+    nameFile = newText;
 }
 
 FWatcher::FWatcher()
@@ -43,3 +44,7 @@ FWatcher::FWatcher(const FWatcher &other)
     existenceFile=other.existenceFile;
 }
 
+QString FWatcher::getNameFile()
+{
+    return nameFile;
+}

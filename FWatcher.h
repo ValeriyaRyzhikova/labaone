@@ -5,6 +5,7 @@
 #include <QString>
 #include <QObject>
 #include<iostream>
+#include<QStringList>
 using namespace std;
 
 
@@ -16,14 +17,17 @@ class FWatcher: public QObject
     QString nameFile;
 public:
     FWatcher(QString);
-    QString printWatcher();
-    void change(const char*);
+    QString getToStringInfo();
+    void renameFile(QString);
     FWatcher();
     FWatcher(const FWatcher &other);
     FWatcher &operator=(const FWatcher &other);
     ~FWatcher(){}
+    QString getNameFile();
 public slots:
     void changedState(QString name, int state, bool existence);
+signals:
+    void signalUpdateWiget();
 };
 
 #endif // FWATCHER_H

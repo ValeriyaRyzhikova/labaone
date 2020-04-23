@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>895</width>
+    <height>635</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QSplitter" name="splitter_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QLabel" name="managerLabel">
+       <property name="text">
+        <string>Manager</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="managerLineEdit"/>
+      <widget class="QSplitter" name="splitter">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QPushButton" name="managerAdd">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="managerDel">
+        <property name="text">
+         <string>Del</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QListWidget" name="managerListWidget"/>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSplitter" name="splitter_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="QLabel" name="watcherLabel">
+       <property name="text">
+        <string>Watchers</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="watcherLineEdit"/>
+      <widget class="QSplitter" name="splitter_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QPushButton" name="watcherAdd">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="watcherDel">
+        <property name="text">
+         <string>Del</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="watcherRename">
+        <property name="text">
+         <string>Rename</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QListWidget" name="watcherListWidget"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>895</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>managerAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addFileToManager()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>managerDel</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>delFileFromManager()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>watcherAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addFileToListWatcher()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>521</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>watcherDel</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>delFileFromListWatcher()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>668</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>watcherRename</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>renameWatcher()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>814</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addFileToManager()</slot>
+  <slot>delFileFromManager()</slot>
+  <slot>addFileToListWatcher()</slot>
+  <slot>delFileFromListWatcher()</slot>
+  <slot>renameWatcher()</slot>
+ </slots>
+</ui>
