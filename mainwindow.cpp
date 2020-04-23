@@ -32,8 +32,14 @@ void MainWindow::addFileToManager()
 {
     if (!((ui->managerLineEdit->text()).isEmpty()))
     {
+        QFileInfo file(ui->managerLineEdit->text());
         FManager::getInstance()->addFile(ui->managerLineEdit->text());
         updateManagerListWidget();
+        for(int i=0; i<listWatcher.size();i++)
+        {
+            if(listWatcher[i].getNameFile()==file.absoluteFilePath())
+                listWatcher[i].changedState(file.absoluteFilePath(), file.size(),file.exists());
+        }
     }
 }
 
