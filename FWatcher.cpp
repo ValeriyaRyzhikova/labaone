@@ -3,6 +3,8 @@
 FWatcher::FWatcher(QString name)
 {
     nameFile=name;
+    state=-1;
+    existenceFile=0;
 }
 
 QString FWatcher::getToStringInfo()
